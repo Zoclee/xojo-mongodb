@@ -1,14 +1,14 @@
 MongoDB Xojo Driver
 ===================
 
-This project is the MongoDB driver for the Xojo programming language.
+This is the MongoDB driver for the Xojo programming language.
 
 The current version of the driver only supports connections to a single server. Support for replica sets and sharding will be added in future versions of the driver.
 
 Installation
 ------------
 
-Simply import the BSONSerializer and MongoDriver modules into your project. The files are located in the [src folder](https://github.com/alwyn1024/mongodb-xojodriver/tree/master/src).
+Simply import the BSONSerializer and MongoDriver modules into your project. The module files are located in the [src folder](https://github.com/alwyn1024/mongodb-xojodriver/tree/master/src) of the repository.
 
 Example Code
 ------------
