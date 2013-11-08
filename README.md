@@ -17,20 +17,24 @@ Example Code
 	Dim db As MongoDriver.MongoDatabase
 	Dim coll As MongoDriver.MongoCollection
 	Dim cursor As MongoDriver.MongoCursor
+	
+	if client.IsConnected then
+	
+		db = client.getDB("test") ' get database object
 
-	db = client.getDB("test") ' get database object
+		coll = db.getCollection("data") ' get collection object
 
-	coll = db.getCollection("data") ' get collection object
+		coll.insert "{mydoc:123}" ' insert document into collection
 
-	coll.insert "{mydoc:123}" ' insert document into collection
+		' query and loop through documents
 
-	' query and loop through documents
+		cursor = coll.find("{}")
+		while cursor.hasNext
+			System.DebugLog cursor.getNext()
+		wend
 
-	cursor = coll.find("{}")
-	while cursor.hasNext
-		System.DebugLog cursor.getNext()
-	wend
+		coll.remove("{a:1}") ' remove document
 
-	coll.remove("{a:1}") ' remove document
+		coll.update"{mydoc:123}", "{$set:{mydoc:234}}" ' update document
 
-	coll.update"{mydoc:123}", "{$set:{mydoc:234}}" ' update document
+	end if
