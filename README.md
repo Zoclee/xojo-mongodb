@@ -8,7 +8,7 @@ The current version of the driver only supports connections to a single server. 
 Installation
 ------------
 
-Simply import the BSONSerializer and MongoDriver modules into your project. The module files are located in the [src folder](https://github.com/alwyn1024/mongodb-xojodriver/tree/master/src) of the repository.
+Simply import the BSONSerializer, JSONSerializer and MongoDriver modules into your project. The module files are located in the [src folder](https://github.com/alwyn1024/mongodb-xojodriver/tree/master/src) of the repository.
 
 Example Code
 ------------
