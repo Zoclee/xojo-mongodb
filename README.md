@@ -17,6 +17,9 @@ Example Code
 	Dim db As MongoDriver.MongoDatabase
 	Dim coll As MongoDriver.MongoCollection
 	Dim cursor As MongoDriver.MongoCursor
+	Dim result As String
+	Dim resultArr () As String
+	Dim resultInt As Integer
 	
 	if client.IsConnected then
 	
