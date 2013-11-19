@@ -27,6 +27,8 @@ Example Code
 		
 		coll = db.getCollection("data") ' get collection object
 		
+		resultInt = coll.count() ' get number of documents in collection
+		
 		coll.insert "{mydoc:123}" ' insert document into collection
 		
 		' query and loop through documents
