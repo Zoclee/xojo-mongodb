@@ -35,7 +35,7 @@ Example Code
 		
 		cursor = coll.find("{}")
 		while cursor.hasNext
-		  System.DebugLog cursor.getNext()
+		  result = cursor.getNext()
 		wend
 		
 		coll.remove("{a:1}") ' remove document
