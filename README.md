@@ -31,11 +31,13 @@ Example Code
 		
 		coll.insert "{mydoc:123}" ' insert document into collection
 		
+		result = coll.findAndModify("{query:{mydoc:123},update:{mydoc:456}}") ' modify and return a single document
+		
 		' query and loop through documents
 		
 		cursor = coll.find("{}")
 		while cursor.hasNext
-		  result = cursor.getNext()
+			result = cursor.getNext()
 		wend
 		
 		coll.remove("{a:1}") ' remove document
@@ -58,7 +60,19 @@ Example Code
 		
 		result = coll.stats(1024) ' get collection stats scaled to kilobyte values
 		
+		coll.save"{_id:1,test:""abc""}" ' insert document
+		coll.save"{_id:1,test:""def""}" ' update document
+		
 		resultInt = coll.totalIndexSize() ' get total size of all indexes for the collection
+		
+		resultInt = coll.copyTo("dataCopy") ' copy whole collection
+		
+		resultInt = coll.dataSize() ' get the size of the collection in bytes
+		
+		result = coll.distinct("mydoc") ' find distinct values for a specified field
+		
+		'coll = db.getCollection("somecoll") ' select collection to remove
+		'resultBool = coll.drop() ' remove collection from database
 		
 		result = coll.reIndex() ' drop and recreate all indexes on collection
 
