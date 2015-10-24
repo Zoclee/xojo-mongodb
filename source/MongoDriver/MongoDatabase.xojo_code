@@ -153,6 +153,15 @@ Protected Class MongoDatabase
 	#tag EndMethod
 
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mClient
+			End Get
+		#tag EndGetter
+		Client As MongoDriver.MongoClient
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h1
 		Protected mClient As MongoDriver.MongoClient
 	#tag EndProperty
