@@ -5,7 +5,7 @@ Protected Class MongoCursor
 		  mIndex = -1
 		  
 		  mClient = initClient
-		  
+		  mCollection = initCollection
 		  
 		End Sub
 	#tag EndMethod
