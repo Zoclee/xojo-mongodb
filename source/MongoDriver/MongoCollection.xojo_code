@@ -260,7 +260,7 @@ Protected Class MongoCollection
 		Function find(criteria As String = "", projection As String = "") As MongoDriver.MongoCursor
 		  Dim cursor As MongoDriver.MongoCursor
 		  
-		  cursor = mClient.Query(mDatabase.getName() + "." + mName, criteria, projection, me)
+		  cursor = mClient.Query(mDatabase.getName() + "." + mName, criteria, projection, 0, me)
 		  
 		  return cursor
 		  
