@@ -293,7 +293,7 @@ Protected Class MongoCollection
 		Function findOne(criteria As String = "", projection As String = "") As String
 		  Dim cursor As MongoDriver.MongoCursor
 		  
-		  cursor = mClient.Query(mDatabase.getName() + "." + mName, criteria, projection, 1)
+		  cursor = mClient.Query(mDatabase.getName() + "." + mName, criteria, projection, 1, me)
 		  
 		  if cursor <> nil then
 		    return cursor.getNext()

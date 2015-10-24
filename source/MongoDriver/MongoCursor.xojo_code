@@ -1,7 +1,7 @@
 #tag Class
 Protected Class MongoCursor
 	#tag Method, Flags = &h0
-		Sub Constructor(initClient As MongoDriver.MongoClient)
+		Sub Constructor(initClient As MongoDriver.MongoClient, initCollection As MongoDriver.MongoCollection = nil)
 		  mIndex = -1
 		  
 		  mClient = initClient
@@ -59,6 +59,20 @@ Protected Class MongoCursor
 	#tag EndMethod
 
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mCollection
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mCollection = value
+			End Set
+		#tag EndSetter
+		Collection As MongoDriver.MongoCollection
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h0
 		Document() As String
 	#tag EndProperty
@@ -83,6 +97,10 @@ Protected Class MongoCursor
 
 	#tag Property, Flags = &h1
 		Protected mClient As MongoDriver.MongoClient
+	#tag EndProperty
+
+	#tag Property, Flags = &h1
+		Protected mCollection As MongoDriver.MongoCollection
 	#tag EndProperty
 
 	#tag Property, Flags = &h1

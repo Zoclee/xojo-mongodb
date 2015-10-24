@@ -402,7 +402,7 @@ Inherits TCPSocket
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function Query(fullCollectionName As String, query As String, selector As String = "", numberToReturn As Integer = 0) As MongoDriver.MongoCursor
+		Function Query(fullCollectionName As String, query As String, selector As String = "", numberToReturn As Integer = 0, collection As MongoDriver.MongoCollection = nil) As MongoDriver.MongoCursor
 		  Dim msg As MemoryBlock
 		  Dim msgLen As Int32
 		  Dim pos As Integer
@@ -483,7 +483,7 @@ Inherits TCPSocket
 		    
 		    if opCode = OP_REPLY then
 		      
-		      cursor = new MongoCursor(me)
+		      cursor = new MongoCursor(me, collection)
 		      
 		      cursor.FullCollectionName = fullCollectionName
 		      
