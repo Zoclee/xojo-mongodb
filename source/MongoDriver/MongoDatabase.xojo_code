@@ -46,7 +46,7 @@ Protected Class MongoDatabase
 		  
 		  if mClient.IsConnected then ' are we connected to Mongo?
 		    
-		    coll = new MongoDriver.MongoCollection(name, mClient, me)
+		    coll = new MongoDriver.MongoCollection(name, me)
 		    
 		  end if
 		  

@@ -1,12 +1,14 @@
 #tag Class
 Protected Class MongoCollection
 	#tag Method, Flags = &h0
-		Sub Constructor(initName As String, initClient As MongoDriver.MongoClient, initDatabase As MongoDriver.MongoDatabase)
+		Sub Constructor(initName As String, initDatabase As MongoDriver.MongoDatabase)
 		  ' initialize the collection
 		  
 		  mName = initName
-		  mClient = initClient
 		  mDatabase = initDatabase
+		  mClient = mDatabase.Client
+		  
+		  
 		  
 		End Sub
 	#tag EndMethod
