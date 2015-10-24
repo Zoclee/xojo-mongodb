@@ -449,6 +449,20 @@ Protected Class MongoCollection
 	#tag EndMethod
 
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  return mDatabase
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mDatabase = value
+			End Set
+		#tag EndSetter
+		Database As MongoDriver.MongoDatabase
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h1
 		Protected mClient As MongoDriver.MongoClient
 	#tag EndProperty
