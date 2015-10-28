@@ -222,7 +222,6 @@ Protected Module BSONSerializer
 		        json.Append "null"
 		      end if
 		      
-		      
 		    case 16 ' 32-bit integer
 		      
 		      pos = pos + 1
@@ -230,6 +229,21 @@ Protected Module BSONSerializer
 		      
 		      pairValue = Str(bsonMB.Int32Value(pos))
 		      pos = pos + 4
+		      
+		      if not parseAsArray then
+		        json.Append """"
+		        json.Append pairName
+		        json.Append """:"
+		      end if
+		      json.Append pairValue
+		      
+		    case 18 ' 64-bit integer
+		      
+		      pos = pos + 1
+		      pairName = decExtractCString(bsonMB, pos)
+		      
+		      pairValue = Str(bsonMB.Int64Value(pos))
+		      pos = pos + 8
 		      
 		      if not parseAsArray then
 		        json.Append """"
@@ -368,14 +382,17 @@ Protected Module BSONSerializer
 		    
 		  end if
 		  
-		  
 		  objLen = 0
 		  for i = 0 to objValues.Ubound
 		    objLen = objLen + Len(objValues(i))
 		  next i
 		  objLen = objLen + 5
 		  
-		  bson = formatInt32(objLen) + Join(objValues, "") + Chr(0)
+		  if use64BitInteger(objLen) then
+		    bson = formatInt64(objLen) + Join(objValues,"") + Chr(0)
+		  else
+		    bson = formatInt32(objLen) + Join(objValues, "") + Chr(0)
+		  end if
 		  
 		  return bson
 		  
@@ -620,6 +637,19 @@ Protected Module BSONSerializer
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Function formatInt64(i As Int64) As String
+		  Dim tmpMB As new MemoryBlock(8)
+		  
+		  tmpMB.LittleEndian = true
+		  tmpMB.Int64Value(0) = i
+		  
+		  Return tmpMB
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Function formatObjectId(s As String) As String
 		  dim tmpMB As new MemoryBlock(12)
 		  dim i, j As Integer
@@ -676,8 +706,29 @@ Protected Module BSONSerializer
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Function use64BitInteger(param As integer) As Boolean
+		  Dim result As Boolean
+		  
+		  result = false
+		  
+		  if (param < BSONSerializer.kMin32BitIntegerValue) or (param > BSONSerializer.kMax32BitIntegerValue) then
+		    result = true
+		  end if
+		  
+		  return result
+		  
+		End Function
+	#tag EndMethod
+
 
 	#tag Constant, Name = EPOCH_SECONDS, Type = Double, Dynamic = False, Default = \"2082844800", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kMax32BitIntegerValue, Type = Double, Dynamic = False, Default = \"2147483647", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = kMin32BitIntegerValue, Type = Double, Dynamic = False, Default = \"-2147483648", Scope = Private
 	#tag EndConstant
 
 
