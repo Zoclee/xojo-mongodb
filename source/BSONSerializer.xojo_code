@@ -20,18 +20,22 @@ Protected Module BSONSerializer
 
 	#tag Method, Flags = &h21
 		Private Function decExtractCString(bsonMB As MemoryBlock, ByRef pos As Integer) As String
-		  Dim s As String
-		  
-		  s = ""
+		  Dim startPos As Integer = pos
 		  
 		  while bsonMB.Byte(pos) <> 0
-		    s = s + Chr(bsonMB.Byte(pos))
 		    pos = pos + 1
 		  wend
+		  
 		  pos = pos + 1
 		  
-		  return escapeJSON(s)
+		  Dim strSize As Integer = pos - startPos - 1
 		  
+		  If strSize > 0 Then
+		    Dim s As String = DefineEncoding(bsonMB.StringValue(startPos, strSize), Encodings.UTF8)
+		    return escapeJSON(s)
+		  End If
+		  
+		  return ""
 		  
 		End Function
 	#tag EndMethod
